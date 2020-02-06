@@ -1,0 +1,48 @@
+<head>
+  
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id='root'>
+     TODO List
+    <div>
+      <input v-model='inputItem'/>
+      <button @click='onInputItem'>提交</button>
+      <ul>
+        <li v-for='item,index in items' :key='index'>
+          {{item}} <button @click='onItem(index)'>删除</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  
+  <script>
+    vm = new Vue({
+      el:'#root',
+      data: {
+        inputItem:'',
+        items:[
+          '买菜',
+          '完成vue学习',
+          '看机器学习'
+        ]
+      },
+      methods:{
+        onInputItem: function(){
+          this.items.push(this.inputItem)
+          this.inputItem = ''
+        },
+        onItem: function(index){
+          this.items.splice(index,1)
+        }
+      }
+    })
+  </script>
+    
+</body>
+
+<!-- https://codepen.io/lulukdog/pen/mdJdWeM -->
+
+

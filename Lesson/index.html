@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="vue.js" type="text/javascript" charset="utf-8"></script>
+		<click_count></click_count>
+	</head>
+	<body>
+		<div id = "tex1" v-once>
+			{{ message }} -- {{name}}
+			<br>
+			<button 
+				v-on:dblclick="onClick($event)"> click me 
+			</button>
+			<br>
+			<click_count title="add 1"></click_count>
+		</div>
+		
+		<script type = "text/javascript">
+			Vue.component('click_count', { 
+				props:["title"],
+				data:function(){
+					return {
+						count:0
+					}
+				},
+				template:'<button v-on:click="addFunc">{{title}}: add_func {{count}}</button>',
+				methods:{
+					addFunc(){
+						this.count ++
+					}
+				},
+			})
+			let data = { message: "hello", name: "zoro"}
+			var vm = new Vue({
+				el:"#tex1",
+				data:data,
+				methods:{
+					onClick : function(e) {
+						console.log(e)
+					}
+				}
+			})
+			vm.$watch('message', function(newV, oldV){
+				console.log('newValue is ',newV, 'oldValue is ',oldV)
+			})
+			data.message = '1'
+			vm.message = '2'
+		</script>
+	</body>
+</html>
